@@ -1,0 +1,13 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net5.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\ProductStore.Application\ProductStore.Application.csproj" />
+    <ProjectReference Include="..\ProductStore.Core\ProductStore.Core.csproj" />
+    <ProjectReference Include="..\ProductStore.Infrastructure\ProductStore.Infrastructure.csproj" />
+  </ItemGroup>
+
+</Project>
