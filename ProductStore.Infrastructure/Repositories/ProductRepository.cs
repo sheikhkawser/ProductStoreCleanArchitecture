@@ -6,6 +6,7 @@ using System.Linq.Dynamic.Core;
 using System.Threading.Tasks;
 using ProductStore.Core.DTOs;
 using ProductStore.Core.Entities;
+using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
 
 namespace ProductStore.Infrastructure.Repositories
 {
@@ -20,9 +21,6 @@ namespace ProductStore.Infrastructure.Repositories
 
         public async Task<IEnumerable<Product>> GetProductsAsync(ProductQueryModel request)
         {
-            int pageSize = Convert.ToInt32(request.Length);
-            int skip = Convert.ToInt32(request.Start);
-
             var data = _context.Products.AsQueryable();
 
             if (!string.IsNullOrEmpty(request.SearchValue))
@@ -41,7 +39,7 @@ namespace ProductStore.Infrastructure.Repositories
                 data = data.OrderBy($"{request.SortColumn} {request.SortColumnDirection}");
             }
 
-            return await data.Skip(skip).Take(pageSize).ToListAsync();
+            return await data.Skip(request.Start).Take(request.Length).ToListAsync();
         }
 
         public async Task<int> GetTotalRecordsAsync(string searchValue)
