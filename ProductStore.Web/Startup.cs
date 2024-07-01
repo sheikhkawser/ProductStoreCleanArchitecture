@@ -65,14 +65,11 @@ namespace ProductStore.Web
             });
 
             // Ensure the database is created and migrations are applied
-            using (var scope = app.ApplicationServices.CreateScope())
-            {
-                var dbContext = scope.ServiceProvider.GetRequiredService<ProductStoreDbContext>();
-                dbContext.Database.Migrate();
-            }
+            using var scope = app.ApplicationServices.CreateScope();
+            var dbContext = scope.ServiceProvider.GetRequiredService<ProductStoreDbContext>();
+            dbContext.Database.MigrateAsync().GetAwaiter().GetResult();
 
-            // Seed the data
-            DataSeeder.Seed(app);
+            DataSeeder.Seed(app).GetAwaiter().GetResult();
         }
     }
 }
