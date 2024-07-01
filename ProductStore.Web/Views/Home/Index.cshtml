@@ -34,15 +34,13 @@
                     "url": "/api/product/GetProducts",
                     "type": "GET",
                     "data": function (d) {
-                        console.log(d);
+                        //console.log(d);
                         return {
                             draw: d.draw,
                             start: d.start,
                             length: d.length,
                             sortColumn: d.columns?.[d.order?.[0]?.column]?.name ?? '',
                             sortColumnDirection: d.order?.[0]?.dir ?? '',
-                            // sortColumn: d.columns[d.order[0].column].name,
-                            // sortColumnDirection: d.order[0].dir,
                             searchValue: d.search.value
                         };
                     }
